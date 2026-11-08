@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bengali Learning Academy</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; }
+        .header { background-color: #000080; color: white; padding: 20px; text-align: center; border-bottom: 5px solid #FFD700; }
+        .header h1 { margin: 0; font-size: 22px; }
+        .header p { color: #FFD700; font-weight: bold; margin-top: 5px; font-size: 14px; }
+        .menu { display: flex; flex-wrap: wrap; justify-content: center; padding: 10px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .menu-item { background: #000080; color: white; margin: 5px; padding: 8px 12px; border-radius: 5px; font-size: 12px; font-weight: bold; }
+        .container { padding: 20px; text-align: center; }
+        .login-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 320px; margin: 0 auto; border-top: 4px solid #FFD700; }
+        .login-box h2 { color: #000080; margin-bottom: 20px; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .btn-login { width: 100%; padding: 12px; background: #FFD700; color: #000080; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; }
+        .btn-register { width: 100%; padding: 12px; background: #000080; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 10px; }
+        .forgot-link { display: block; margin-top: 15px; color: #000080; text-decoration: none; font-size: 13px; }
+        .divider { margin: 20px 0 10px 0; border-top: 1px solid #eee; position: relative; }
+        .divider span { background: white; padding: 0 10px; color: #888; font-size: 12px; position: relative; top: -10px; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>ABHIJIT MONDAL</h1>
+        <p>BENGALI LEARNING ACADEMY</p>
+    </div>
+
+    <div class="menu">
+        <span class="menu-item">Class VI</span>
+        <span class="menu-item">Class VII</span>
+        <span class="menu-item">Class VIII</span>
+        <span class="menu-item">Class IX</span>
+        <span class="menu-item">Class X</span>
+        <span class="menu-item">Grammar</span>
+        <span class="menu-item">Study Materials</span>
+    </div>
+
+    <div class="container">
+        <div class="login-box">
+            <h2>Student Login</h2>
+            <input type="text" id="loginMobile" placeholder="Mobile Number (মোবাইল নম্বর)">
+            <input type="password" id="loginPassword" placeholder="Password (পাসওয়ার্ড)">
+            
+            <button id="loginBtn" class="btn-login">Login</button>
+            
+            <a href="#" class="forgot-link">Forgot Password?</a>
+            
+            <div class="divider"><span>New Student?</span></div>
+            
+            <button class="btn-register" onclick="window.location.href='register.html'">Create New Account</button>
+        </div>
+    </div>
+
+    <!-- Firebase Database Connection for Login -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgbtG7aIa9tyAgar6FRnYhLQMWGQjo504",
+            authDomain: "arshi-bengali-learning-academy.firebaseapp.com",
+            projectId: "arshi-bengali-learning-academy",
+            storageBucket: "arshi-bengali-learning-academy.firebasestorage.app",
+            messagingSenderId: "664426976663",
+            appId: "1:664426976663:web:8bef99d3e053805fb420d2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        document.getElementById("loginBtn").addEventListener("click", async () => {
+            const mobile = document.getElementById("loginMobile").value;
+            const password = document.getElementById("loginPassword").value;
+
+            if(mobile === "" || password === "") {
+                alert("দয়া করে মোবাইল নম্বর এবং পাসওয়ার্ড দিন!");
+                return;
+            }
+
+            try {
+                document.getElementById("loginBtn").innerText = "Checking...";
+                
+                // ডাটাবেসে খোঁজা হচ্ছে যে এই মোবাইল নম্বর ও পাসওয়ার্ড আছে কি না
+                const q = query(collection(db, "students"), where("mobile", "==", mobile), where("password", "==", password));
+                const querySnapshot = await getDocs(q);
+                
+                if (!querySnapshot.empty) {
+                    // সঠিক হলে ড্যাশবোর্ডে নিয়ে যাবে
+                    alert("লগইন সফল হয়েছে!");
+                    window.location.href = "dashboard.html";
+                } else {
+                    // ভুল হলে মেসেজ দেখাবে
+                    alert("ভুল মোবাইল নম্বর বা পাসওয়ার্ড! দয়া করে আবার চেষ্টা করুন।");
+                    document.getElementById("loginBtn").innerText = "Login";
+                }
+            } catch (e) {
+                alert("কোথাও একটা সমস্যা হয়েছে: " + e.message);
+                document.getElementById("loginBtn").innerText = "Login";
+            }
+        });
+    </script>
+</body>
+</html>
