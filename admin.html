@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Abhijit Mondal</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; }
+        
+        .header { background-color: #000080; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid #FFD700; }
+        .header h2 { margin: 0; font-size: 16px; }
+        .logout-btn { background: #ff4d4d; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 12px; }
+        
+        .stats-container { display: flex; justify-content: space-around; padding: 15px; background: white; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .stat-box { text-align: center; }
+        .stat-box h3 { margin: 0; color: #000080; font-size: 20px; }
+        .stat-box p { margin: 5px 0 0 0; color: #555; font-size: 12px; font-weight: bold; }
+        
+        .admin-title { text-align: center; color: #000080; margin: 15px 0 5px 0; }
+        
+        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
+        
+        .card { background: white; padding: 20px 10px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 4px solid #008000; }
+        .card h4 { color: #000080; margin: 0 0 15px 0; font-size: 14px; }
+        .card button { background: #000080; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; width: 95%; cursor: pointer; font-size: 12px; }
+        .card button.upload { background: #FFD700; color: #000080; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>ADMIN PANEL</h2>
+        <a href="index.html" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="stats-container">
+        <div class="stat-box">
+            <h3>150</h3>
+            <p>Total Students</p>
+        </div>
+        <div class="stat-box">
+            <h3>12</h3>
+            <p>Pending Approvals</p>
+        </div>
+    </div>
+
+    <h3 class="admin-title">নমস্কার, অভিজিৎ স্যার!</h3>
+
+    <div class="grid-container">
+        <div class="card">
+            <h4>Upload New Notes</h4>
+            <button class="upload">➕ Upload PDF</button>
+        </div>
+        
+        <div class="card">
+            <h4>Manage Students</h4>
+            <button>View All Students</button>
+        </div>
+        
+        <div class="card">
+            <h4>Payment Approvals</h4>
+            <button>Check Payments</button>
+        </div>
+        
+        <div class="card">
+            <h4>App Settings</h4>
+            <button>Edit Classes</button>
+        </div>
+    </div>
+
+</body>
+</html>
