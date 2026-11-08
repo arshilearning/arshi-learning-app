@@ -5,102 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bengali Learning Academy</title>
     <style>
-        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; }
-        .header { background-color: #000080; color: white; padding: 20px; text-align: center; border-bottom: 5px solid #FFD700; }
-        .header h1 { margin: 0; font-size: 22px; }
-        .header p { color: #FFD700; font-weight: bold; margin-top: 5px; font-size: 14px; }
-        .menu { display: flex; flex-wrap: wrap; justify-content: center; padding: 10px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .menu-item { background: #000080; color: white; margin: 5px; padding: 8px 12px; border-radius: 5px; font-size: 12px; font-weight: bold; }
-        .container { padding: 20px; text-align: center; }
-        .login-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 320px; margin: 0 auto; border-top: 4px solid #FFD700; }
-        .login-box h2 { color: #000080; margin-bottom: 20px; }
-        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .btn-login { width: 100%; padding: 12px; background: #FFD700; color: #000080; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; }
-        .btn-register { width: 100%; padding: 12px; background: #000080; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 10px; }
-        .forgot-link { display: block; margin-top: 15px; color: #000080; text-decoration: none; font-size: 13px; }
-        .divider { margin: 20px 0 10px 0; border-top: 1px solid #eee; position: relative; }
-        .divider span { background: white; padding: 0 10px; color: #888; font-size: 12px; position: relative; top: -10px; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #000080;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header h2 {
+            margin: 5px 0 0 0;
+            font-size: 16px;
+            color: #FFD700;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .selector-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .note-card {
+            background: white;
+            border-left: 5px solid #FFD700;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .note-title {
+            font-size: 18px;
+            color: #000080;
+            font-weight: bold;
+        }
+        .download-btn {
+            background-color: #000080;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .download-btn:hover {
+            background-color: #000066;
+        }
+        .no-data {
+            text-align: center;
+            color: #ff0000;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>ABHIJIT MONDAL</h1>
-        <p>BENGALI LEARNING ACADEMY</p>
-    </div>
-
-    <div class="menu">
-        <span class="menu-item">Class VI</span>
-        <span class="menu-item">Class VII</span>
-        <span class="menu-item">Class VIII</span>
-        <span class="menu-item">Class IX</span>
-        <span class="menu-item">Class X</span>
-        <span class="menu-item">Grammar</span>
-        <span class="menu-item">Study Materials</span>
+        <h2>BENGALI LEARNING ACADEMY</h2>
     </div>
 
     <div class="container">
-        <div class="login-box">
-            <h2>Student Login</h2>
-            <input type="text" id="loginMobile" placeholder="Mobile Number (মোবাইল নম্বর)">
-            <input type="password" id="loginPassword" placeholder="Password (পাসওয়ার্ড)">
-            
-            <button id="loginBtn" class="btn-login">Login</button>
-            
-            <a href="#" class="forgot-link">Forgot Password?</a>
-            
-            <div class="divider"><span>New Student?</span></div>
-            
-            <button class="btn-register" onclick="window.location.href='register.html'">Create New Account</button>
+        <div class="selector-box">
+            <label for="classSelect"><b>আপনার ক্লাস নির্বাচন করুন:</b></label>
+            <select id="classSelect">
+                <option value="" disabled selected>ক্লাস সিলেক্ট করুন</option>
+                <option value="Class_6">Class 6</option>
+                <option value="Class_7">Class 7</option>
+                <option value="Class_8">Class 8</option>
+                <option value="Class_9">Class 9</option>
+                <option value="Class_10">Class 10</option>
+            </select>
+        </div>
+
+        <div id="notesContainer">
+            <!-- নোটসগুলো এখানে দেখাবে -->
         </div>
     </div>
 
-    <!-- Firebase Database Connection for Login -->
+    <!-- Firebase SDK Setup -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Your Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyCgbtG7aIa9tyAgar6FRnYhLQMWGQjo504",
-            authDomain: "arshi-bengali-learning-academy.firebaseapp.com",
-            projectId: "arshi-bengali-learning-academy",
-            storageBucket: "arshi-bengali-learning-academy.firebasestorage.app",
-            messagingSenderId: "664426976663",
-            appId: "1:664426976663:web:8bef99d3e053805fb420d2"
+            apiKey: "AIzaSyCWSBFvyn2qkAlpVad0yRdZxsuCE7eePdU",
+            authDomain: "bengali-learning-academy.firebaseapp.com",
+            databaseURL: "https://bengali-learning-academy-default-rtdb.firebaseio.com",
+            projectId: "bengali-learning-academy",
+            storageBucket: "bengali-learning-academy.firebasestorage.app",
+            messagingSenderId: "90504318339",
+            appId: "1:90504318339:web:42724d1df6122a7d2dfab6",
+            measurementId: "G-X6LR3QPK62"
         };
 
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        const db = getDatabase(app);
 
-        document.getElementById("loginBtn").addEventListener("click", async () => {
-            const mobile = document.getElementById("loginMobile").value;
-            const password = document.getElementById("loginPassword").value;
+        // Fetch Data when class is selected
+        document.getElementById("classSelect").addEventListener("change", function() {
+            const className = this.value;
+            const notesContainer = document.getElementById("notesContainer");
+            
+            notesContainer.innerHTML = "<p style='text-align:center;'>নোটস খোঁজা হচ্ছে...</p>";
 
-            if(mobile === "" || password === "") {
-                alert("দয়া করে মোবাইল নম্বর এবং পাসওয়ার্ড দিন!");
-                return;
-            }
-
-            try {
-                document.getElementById("loginBtn").innerText = "Checking...";
-                
-                // ডাটাবেসে খোঁজা হচ্ছে যে এই মোবাইল নম্বর ও পাসওয়ার্ড আছে কি না
-                const q = query(collection(db, "students"), where("mobile", "==", mobile), where("password", "==", password));
-                const querySnapshot = await getDocs(q);
-                
-                if (!querySnapshot.empty) {
-                    // সঠিক হলে ড্যাশবোর্ডে নিয়ে যাবে
-                    alert("লগইন সফল হয়েছে!");
-                    window.location.href = "dashboard.html";
+            const dbRef = ref(db, 'StudyMaterials/' + className);
+            onValue(dbRef, (snapshot) => {
+                notesContainer.innerHTML = ''; // Clear loading text
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        const data = childSnapshot.val();
+                        
+                        // Create card HTML
+                        const card = document.createElement("div");
+                        card.className = "note-card";
+                        card.innerHTML = `
+                            <div class="note-title">📚 ${data.topic}</div>
+                            <a href="${data.link}" target="_blank" class="download-btn">নোটস দেখুন / ডাউনলোড করুন</a>
+                        `;
+                        // Add card to container (newest first)
+                        notesContainer.prepend(card);
+                    });
                 } else {
-                    // ভুল হলে মেসেজ দেখাবে
-                    alert("ভুল মোবাইল নম্বর বা পাসওয়ার্ড! দয়া করে আবার চেষ্টা করুন।");
-                    document.getElementById("loginBtn").innerText = "Login";
+                    notesContainer.innerHTML = "<p class='no-data'>এই ক্লাসের জন্য এখনো কোনো নোটস আপলোড করা হয়নি।</p>";
                 }
-            } catch (e) {
-                alert("কোথাও একটা সমস্যা হয়েছে: " + e.message);
-                document.getElementById("loginBtn").innerText = "Login";
-            }
+            });
         });
     </script>
 </body>
