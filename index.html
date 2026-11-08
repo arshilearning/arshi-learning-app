@@ -163,10 +163,46 @@
     var userId = prompt("অ্যাকাডেমিতে প্রবেশ করতে ইউজার আইডি (User ID) দিন:");
     var password = prompt("এবার পাসওয়ার্ড (Password) দিন:");
 
-    if (userId !== "student" || password !== "1234") {
+    // ভুল করে স্পেস দিয়ে দিলে বা বড় হাতের লিখলে সেটা নিজে থেকে ঠিক করে নেওয়ার জন্য
+    if(userId) userId = userId.trim().toLowerCase();
+    if(password) password = password.trim();
+
+    var valid = false;
+    var studentClass = "";
+
+    // ক্লাস ৬ থেকে ১০ পর্যন্ত আইডি এবং পাসওয়ার্ড চেক
+    if (userId === "class6" && password === "6666") {
+        valid = true; studentClass = "Class_6";
+    } else if (userId === "class7" && password === "7777") {
+        valid = true; studentClass = "Class_7";
+    } else if (userId === "class8" && password === "8888") {
+        valid = true; studentClass = "Class_8";
+    } else if (userId === "class9" && password === "9999") {
+        valid = true; studentClass = "Class_9";
+    } else if (userId === "class10" && password === "1010") {
+        valid = true; studentClass = "Class_10";
+    }
+
+    if (!valid) {
         alert("ভুল আইডি বা পাসওয়ার্ড! আপনি সঠিক তথ্য ছাড়া পেজটি দেখতে পারবেন না।");
         document.body.innerHTML = "<h2 style='text-align:center; margin-top:50px; color:red;'>ভুল আইডি বা পাসওয়ার্ড! দয়া করে পেজটি রিফ্রেশ করে আবার চেষ্টা করুন।</h2>";
+    } else {
+        // সঠিক লগইন হলে অন্য ক্লাসের অপশন লুকিয়ে ফেলার কোড
+        document.addEventListener("DOMContentLoaded", function() {
+            var selects = document.getElementsByTagName("select");
+            if(selects.length > 0) {
+                var classDropdown = selects[0];
+                for (var i = classDropdown.options.length - 1; i >= 0; i--) {
+                    var optValue = classDropdown.options[i].value;
+                    // যে ক্লাসের আইডি দিয়েছে, শুধু সেই ক্লাসটি রেখে বাকিগুলো মুছে দেবে
+                    if (optValue !== studentClass && (optValue === "Class_6" || optValue === "Class_7" || optValue === "Class_8" || optValue === "Class_9" || optValue === "Class_10")) {
+                        classDropdown.remove(i);
+                    }
+                }
+            }
+        });
     }
     </script>
+    
     
 </html>
