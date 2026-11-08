@@ -3,70 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Abhijit Mondal</title>
+    <title>Admin Panel - Bengali Learning Academy</title>
     <style>
-        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; }
-        
-        .header { background-color: #000080; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid #FFD700; }
-        .header h2 { margin: 0; font-size: 16px; }
-        .logout-btn { background: #ff4d4d; color: white; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 12px; }
-        
-        .stats-container { display: flex; justify-content: space-around; padding: 15px; background: white; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .stat-box { text-align: center; }
-        .stat-box h3 { margin: 0; color: #000080; font-size: 20px; }
-        .stat-box p { margin: 5px 0 0 0; color: #555; font-size: 12px; font-weight: bold; }
-        
-        .admin-title { text-align: center; color: #000080; margin: 15px 0 5px 0; }
-        
-        .grid-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 15px; }
-        
-        .card { background: white; padding: 20px 10px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 4px solid #008000; }
-        .card h4 { color: #000080; margin: 0 0 15px 0; font-size: 14px; }
-        .card button { background: #000080; color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; width: 95%; cursor: pointer; font-size: 12px; }
-        .card button.upload { background: #FFD700; color: #000080; }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #000080;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .header h2 {
+            margin: 5px 0 0 0;
+            font-size: 16px;
+            color: #FFD700;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .form-box h3 {
+            color: #000080;
+            text-align: center;
+            margin-top: 0;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            background-color: #FFD700;
+            color: #000080;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e6c200;
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h2>ADMIN PANEL</h2>
-        <a href="index.html" class="logout-btn">Logout</a>
+        <h1>ABHIJIT MONDAL</h1>
+        <h2>BENGALI LEARNING ACADEMY (ADMIN)</h2>
     </div>
 
-    <div class="stats-container">
-        <div class="stat-box">
-            <h3>150</h3>
-            <p>Total Students</p>
-        </div>
-        <div class="stat-box">
-            <h3>12</h3>
-            <p>Pending Approvals</p>
-        </div>
-    </div>
+    <div class="container">
+        <div class="form-box">
+            <h3>স্টাডি মেটেরিয়াল আপলোড করুন</h3>
+            <form id="uploadForm">
+                <label for="classSelect"><b>ক্লাস নির্বাচন করুন:</b></label>
+                <select id="classSelect" required>
+                    <option value="" disabled 
+<select id="classSelect" required>
+    <option value="" disabled selected>ক্লাস সিলেক্ট করুন</option>
+    <option value="Class_6">Class 6</option>
+    <option value="Class_7">Class 7</option>
+    <option value="Class_8">Class 8</option>
+    <option value="Class_9">Class 9</option>
+    <option value="Class_10">Class 10</option>
+</select>
 
-    <h3 class="admin-title">নমস্কার, অভিজিৎ স্যার!</h3>
+                <label for="topicName"><b>টপিক বা বিষয়ের নাম:</b></label>
+                <input type="text" id="topicName" placeholder="যেমন: ব্যাকরণ - সমাস" required>
 
-    <div class="grid-container">
-        <div class="card">
-            <h4>Upload New Notes</h4>
-            <button class="upload">➕ Upload PDF</button>
-        </div>
-        
-        <div class="card">
-            <h4>Manage Students</h4>
-            <button>View All Students</button>
-        </div>
-        
-        <div class="card">
-            <h4>Payment Approvals</h4>
-            <button>Check Payments</button>
-        </div>
-        
-        <div class="card">
-            <h4>App Settings</h4>
-            <button>Edit Classes</button>
+                <label for="driveLink"><b>Google Drive লিংক:</b></label>
+                <input type="url" id="driveLink" placeholder="এখানে পিডিএফ বা নোটসের লিংক পেস্ট করুন" required>
+
+                <button type="submit">আপলোড করুন</button>
+            </form>
         </div>
     </div>
 
+    <!-- Firebase SDK Setup -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCWSBFvyn2qkAlpVad0yRdZxsuCE7eePdU",
+            authDomain: "bengali-learning-academy.firebaseapp.com",
+            databaseURL: "https://bengali-learning-academy-default-rtdb.firebaseio.com",
+            projectId: "bengali-learning-academy",
+            storageBucket: "bengali-learning-academy.firebasestorage.app",
+            messagingSenderId: "90504318339",
+            appId: "1:90504318339:web:42724d1df6122a7d2dfab6",
+            measurementId: "G-X6LR3QPK62"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Handle form submission
+        document.getElementById("uploadForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const className = document.getElementById("classSelect").value;
+            const topicName = document.getElementById("topicName").value;
+            const driveLink = document.getElementById("driveLink").value;
+
+            // Save to database
+            push(ref(db, 'StudyMaterials/' + className), {
+                topic: topicName,
+                link: driveLink,
+                timestamp: Date.now()
+            }).then(() => {
+                alert("আপনার নোটস সফলভাবে ডেটাবেসে যোগ হয়েছে!");
+                document.getElementById("uploadForm").reset();
+            }).catch((error) => {
+                alert("কোথাও সমস্যা হয়েছে: " + error.message);
+            });
+        });
+    </script>
 </body>
 </html>
