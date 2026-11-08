@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background-color: #f4f4f9; }
+        .header { background-color: #000080; color: white; padding: 15px; text-align: center; border-bottom: 5px solid #FFD700; }
+        .header h1 { margin: 0; font-size: 20px; }
+        .container { padding: 20px; text-align: center; }
+        .reg-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 320px; margin: 0 auto; border-top: 4px solid #FFD700; }
+        .reg-box h2 { color: #000080; margin-bottom: 15px; }
+        input, select { width: 90%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; box-sizing: border-box; }
+        .btn-submit { width: 100%; padding: 12px; background: #000080; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; }
+        .back-link { display: block; margin-top: 20px; color: #000080; text-decoration: none; font-size: 14px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>ABHIJIT MONDAL</h1>
+        <p style="color: #FFD700; font-size: 12px; margin-top: 5px; font-weight: bold;">BENGALI LEARNING ACADEMY</p>
+    </div>
+
+    <div class="container">
+        <div class="reg-box">
+            <h2>New Student Registration</h2>
+            
+            <input type="text" id="fullName" placeholder="Full Name (স্টুডেন্টের নাম)">
+            <input type="tel" id="mobile" placeholder="Mobile Number (মোবাইল নম্বর)">
+            
+            <select id="classSelect">
+                <option value="">Select Class (ক্লাস বেছে নিন)</option>
+                <option value="6">Class VI</option>
+                <option value="7">Class VII</option>
+                <option value="8">Class VIII</option>
+                <option value="9">Class IX</option>
+                <option value="10">Class X</option>
+            </select>
+
+            <input type="password" id="password" placeholder="Create Password (পাসওয়ার্ড দিন)">
+            
+            <button id="registerBtn" class="btn-submit">Register Now</button>
+            
+            <a href="index.html" class="back-link">← Back to Login</a>
+        </div>
+    </div>
+
+    <!-- Firebase Database Connection -->
+    <script type="module">
+        // আপনার পাঠানো কোড এবং ডাটাবেস যুক্ত করা হলো
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgbtG7aIa9tyAgar6FRnYhLQMWGQjo504",
+            authDomain: "arshi-bengali-learning-academy.firebaseapp.com",
+            projectId: "arshi-bengali-learning-academy",
+            storageBucket: "arshi-bengali-learning-academy.firebasestorage.app",
+            messagingSenderId: "664426976663",
+            appId: "1:664426976663:web:8bef99d3e053805fb420d2"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Register বোতামে চাপ দিলে কী হবে তার কোড
+        document.getElementById("registerBtn").addEventListener("click", async () => {
+            const name = document.getElementById("fullName").value;
+            const mobile = document.getElementById("mobile").value;
+            const studentClass = document.getElementById("classSelect").value;
+            const password = document.getElementById("password").value;
+
+            // যদি কোনো ঘর ফাঁকা থাকে
+            if(name == "" || mobile == "" || studentClass == "" || password == "") {
+                alert("দয়া করে সমস্ত তথ্য সঠিকভাবে পূরণ করুন!");
+                return;
+            }
+
+            // ডাটাবেসে সেভ করার চেষ্টা
+            try {
+                document.getElementById("registerBtn").innerText = "অপেক্ষা করুন...";
+                await addDoc(collection(db, "students"), {
+                    name: name,
+                    mobile: mobile,
+                    studentClass: studentClass,
+                    password: password,
+                    timestamp: new Date()
+                });
+                alert("রেজিস্ট্রেশন সফল হয়েছে! এবার লগইন করুন।");
+                window.location.href = "index.html"; // সফল হলে লগইন পেজে নিয়ে যাবে
+            } catch (e) {
+                alert("কোথাও একটা সমস্যা হয়েছে: " + e.message);
+                document.getElementById("registerBtn").innerText = "Register Now";
+            }
+        });
+    </script>
+</body>
+</html>
