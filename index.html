@@ -159,4 +159,14 @@
         });
     </script>
 </body>
+    <script>
+    var userId = prompt("অ্যাকাডেমিতে প্রবেশ করতে ইউজার আইডি (User ID) দিন:");
+    var password = prompt("এবার পাসওয়ার্ড (Password) দিন:");
+
+    if (userId !== "student" || password !== "1234") {
+        alert("ভুল আইডি বা পাসওয়ার্ড! আপনি সঠিক তথ্য ছাড়া পেজটি দেখতে পারবেন না।");
+        document.body.innerHTML = "<h2 style='text-align:center; margin-top:50px; color:red;'>ভুল আইডি বা পাসওয়ার্ড! দয়া করে পেজটি রিফ্রেশ করে আবার চেষ্টা করুন।</h2>";
+    }
+    </script>
+    
 </html>
